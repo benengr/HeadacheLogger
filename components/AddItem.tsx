@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Rating } from 'react-native-ratings';
+import { barometer } from 'react-native-sensors';
 
 interface Props {}
 interface State {
   descriptions: Array<String>,
   severity: number,
+  subscription: Object | null,
+  pressure: number,
 }
 
 export default class AddItem extends Component<Props, State> {
@@ -14,7 +17,21 @@ export default class AddItem extends Component<Props, State> {
     this.state = {
       severity: 2,
       descriptions: ['Best', 'No Pain', 'Some Pain', 'Moderate Pain', 'A Lot of Pain', 'Worst'],
+      subscription: null,
+      pressure: 0.0
     };
+  }
+
+  componentDidMount() {
+    const subscription = barometer.subscribe(({pressure}) => {
+      this.setState({pressure: pressure});
+    });
+
+    this.setState({subscription});
+  }
+
+  componentWillUnmount() {
+
   }
   render() {
     return (
@@ -25,6 +42,11 @@ export default class AddItem extends Component<Props, State> {
           imageSize={40}
           onFinishRating={(rating)=> this.setState({severity: rating})}
         />
+        <View style={styles.pressureContainer}>
+          <Text>Current Pressure: </Text>
+          <Text>{this.state.pressure.toFixed(2)}</Text>
+        </View>
+        
       </View>
     );
   }
@@ -41,5 +63,9 @@ const styles = StyleSheet.create({
   },
   ratingLabel: {
     fontSize: 20
+  },
+  pressureContainer: {
+    flex: 1,
+    flexDirection: 'row'
   }
 });
