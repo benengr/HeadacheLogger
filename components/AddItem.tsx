@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import { Rating } from 'react-native-ratings';
 import { barometer } from 'react-native-sensors';
 
@@ -46,7 +46,10 @@ export default class AddItem extends Component<Props, State> {
           <Text>Current Pressure: </Text>
           <Text>{this.state.pressure.toFixed(2)}</Text>
         </View>
-        
+        <View style={styles.buttonContainer}>
+          <Button title="Cancel" onPress={() => console.log("Canceld")} />
+          <Button title="Ok" onPress={() => console.log("Okayed")} />
+        </View>
       </View>
     );
   }
@@ -55,17 +58,21 @@ export default class AddItem extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '100%',
+    height: 300,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5CC88',
   },
   ratingLabel: {
-    fontSize: 20
+    fontSize: 20,
   },
   pressureContainer: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
   }
 });
