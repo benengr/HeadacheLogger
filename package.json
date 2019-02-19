@@ -10,7 +10,8 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.5",
-    "react-native-ratings": "^6.3.0"
+    "react-native-ratings": "^6.3.0",
+    "react-native-sensors": "^5.1.7"
   },
   "devDependencies": {
     "@types/jest": "^24.0.6",
