@@ -8,6 +8,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "openweather-apis": "^4.0.0",
     "react": "16.6.3",
     "react-native": "0.58.5",
     "react-native-ratings": "^6.3.0",
