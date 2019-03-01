@@ -24,9 +24,9 @@ export default class AddItem extends Component<Props, State> {
 
   componentDidMount() {
     const subscription = barometer.subscribe(({pressure}) => {
-      this.setState({pressure: pressure});
+      console.log(`Pressure is ${pressure}`);
+      this.setState({pressure});
     });
-
     this.setState({subscription});
   }
 
@@ -34,6 +34,7 @@ export default class AddItem extends Component<Props, State> {
 
   }
   render() {
+    console.log(this.state);
     return (
       <View style={styles.container}>
         <Text style={styles.ratingLabel}>{this.state.descriptions[this.state.severity]}</Text>
@@ -43,8 +44,7 @@ export default class AddItem extends Component<Props, State> {
           onFinishRating={(rating)=> this.setState({severity: rating})}
         />
         <View style={styles.pressureContainer}>
-          <Text>Current Pressure: </Text>
-          <Text>{this.state.pressure.toFixed(2)}</Text>
+          <Text>Current Pressure: {this.state.pressure.toFixed(2)}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button title="Cancel" onPress={() => console.log("Canceld")} />
